@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+    manager-api:
+        image: manager-api
+        build: ./manager-api
+        ports:
+            - 8000:80
+        volumes:
+            - /etc/emu-cloud:/etc/emu-cloud
+            - /var/emu-cloud:/var/emuDBs
+
+    websocket-protocol:
+        image: websocket-protocol
+        build: ./websocket-protocol
+        ports:
+            - 17890:17890
+        volumes:
+            - /etc/emu-cloud:/etc/emu-cloud
+            - /var/emu-cloud:/var/emuDBs
