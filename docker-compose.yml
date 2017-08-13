@@ -18,3 +18,16 @@ services:
         volumes:
             - /etc/emu-cloud:/etc/emu-cloud
             - /var/emu-cloud:/var/emuDBs
+
+    database: 
+        image: postgres
+        ports:
+            - 5432:5432
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        environment:
+            POSTGRES_PASSWORD: my-password
+
+volumes:
+    postgres-data:
+        external: true
