@@ -12,3 +12,6 @@ RUN rm /var/www/html/emudb-manager.config.php && ln -s /etc/emu-cloud/emudb-mana
 
 RUN echo "display_errors=off" >> /usr/local/etc/php/conf.d/log.ini
 RUN echo "log_errors=on" >> /usr/local/etc/php/conf.d/log.ini
+
+RUN git config --file /etc/gitconfig user.name 'EMU Cloud Manager API'
+RUN git config --file /etc/gitconfig user.email 'nobody@example.com'
