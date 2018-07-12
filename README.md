@@ -61,4 +61,4 @@ You should now be able to visit ```http://yourservershostname.com:6500```. This 
 
 ### Known Problems
 
-The emuDB-Manager backend tries to “discover” Keycloak at startup time. However, they both start at virtually the same time, so discovery will fail. Try restarting the manager backend when everything is running already (```(sudo) docker container restart emu-cloud_manager-api_1```).
+The websocket server tries to “discover” Keycloak at startup time. However, they both start at virtually the same time, so discovery will fail. Try restarting the websocket server when everything is running already (```(sudo) docker container restart emucloud_websocket-protocol_1```).
