@@ -53,8 +53,8 @@ The next steps will be to feed some initial data into your new services:
 
 1. Configure Keycloak
    1. Keycloak will refuse any non-encrypted connections. For production purposes, this is good, but for testing purposes, change it like this:
-      1. You need to connect to the database server. If you have ```psql``` (the PostgreSQL client) installed on your server, use that. Otherwise, use a machine that can access port 5432 on your server.
-      2. ```psql  -h hostname-of-your-server -U database-user emu``` # NB: emu is the database name
+      1. You need to connect to the database server. If you have ```psql``` (the PostgreSQL client) installed on a machine that can access port 5432 on your server, you can use that: ```psql  -h hostname-of-your-server -U database-user emu```
+      2. Otherwise, you can run this on your server: ```docker run -it --rm postgres psql -h hostname-of-your-server -U database-user emu``` (which will fire up a temporary instance of the psql client. NB you cannot use localhost as the hostname here.)
       3. ```update realm set ssl_required='none' where id='master';```
    2. Open up Keycloak at ```http://hostname-of-your-server:6520``` and log into the administration console as ```keycloakadmin``` (you have set the password in ```docker-compose.yml```).
    3. In the clients menu, import a new client (click “Create” and use the import option) using the file in ```initial-setup/emudb-manager.json``` (but first replace all instances of example.com in that file with the host name of your server)
