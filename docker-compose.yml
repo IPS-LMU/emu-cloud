@@ -5,7 +5,7 @@ services:
         image: manager-api
         build: ./manager-api
         ports:
-            - 8000:80
+            - 6510:80
         volumes:
             - ./config:/etc/emu-cloud
             - /var/emu-cloud/emuDBs:/var/emuDBs
@@ -35,7 +35,7 @@ services:
         restart: always
         image: jboss/keycloak
         ports:
-            - 8080:8080
+            - 6520:8080
         environment:
             - KEYCLOAK_USER=keycloakadmin
             - KEYCLOAK_PASSWORD=1234

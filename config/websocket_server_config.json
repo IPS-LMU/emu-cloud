@@ -5,7 +5,7 @@
     "ssl_key": "certs/noPwdServer.key",
     "ssl_cert": "certs/server.crt",
     "openIdConnect": {
-        "openIdProvider": "http://example.com:8080/auth/realms/master",
+        "openIdProvider": "http://example.com:6520/auth/realms/master",
         "clientId": "emudb-manager",
         "clientSecret": "..."
     },
