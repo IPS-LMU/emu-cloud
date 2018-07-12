@@ -1,0 +1,27 @@
+{
+    "path2emuDBs": "/var/emuDBs",
+    "ssl": false,
+    "port": 17890,
+    "ssl_key": "certs/noPwdServer.key",
+    "ssl_cert": "certs/server.crt",
+    "openIdConnect": {
+        "openIdProvider": "http://example.com:8080/auth/realms/master",
+        "clientId": "emudb-manager",
+        "clientSecret": "..."
+    },
+    "use_ldap": false,
+    "ldap_address": "ldaps://example.com:636",
+    "binddn_left": "uid=",
+    "binddn_right": ",ou=People,dc=example,dc=com",
+    "sqlite_db": "IPS-EMUprot-nodeWSserver.DB",
+    "use_git_if_repo_found": true,
+    "filter_bndlList_for_finishedEditing": true,
+    "sql": {
+        "host": "sql-not-needed",
+        "port": 5432,
+        "user": "sql-not-needed",
+        "password": "sql-not-needed",
+        "database": "sql-not-needed",
+        "ssl": "disable"
+    }
+}

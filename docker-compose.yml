@@ -7,8 +7,8 @@ services:
         ports:
             - 8000:80
         volumes:
-            - ../cloud-data/config:/etc/emu-cloud
-            - ../cloud-data/emuDBs:/var/emuDBs
+            - ./config:/etc/emu-cloud
+            - /var/emu-cloud/emuDBs:/var/emuDBs
 
     websocket-protocol:
         image: websocket-protocol
@@ -16,34 +16,41 @@ services:
         ports:
             - 17890:17890
         volumes:
-            - ../cloud-data/config:/etc/emu-cloud
-            - ../cloud-data/data:/var/emuDBs
+            - ./config:/etc/emu-cloud
+            - /var/emu-cloud/emuDBs:/var/emuDBs
 
     database: 
         restart: always
         image: postgres
         ports:
-          - 5432:5432
+            - 5432:5432
         volumes:
-          - ../cloud-data/postgresql-data:/var/lib/postgresql/data
+            - /var/emu-cloud/postgresql-data:/var/lib/postgresql/data
         environment:
-          - POSTGRES_PASSWORD summerday-root
-          - POSTGRES_DB=emu
-          - POSTGRES_USER=database-user
-          - POSTGRES_PASSWORD=database-password
+            - POSTGRES_PASSWORD summerday-root
+            - POSTGRES_DB=emu
+            - POSTGRES_USER=database-user
+            - POSTGRES_PASSWORD=database-password
 
     keycloak:
         restart: always
         image: jboss/keycloak
         ports:
-          - 8080:8080
+            - 8080:8080
         environment:
-          - KEYCLOAK_USER=keycloakadmin
-          - KEYCLOAK_PASSWORD=1234
-          - PROXY_ADDRESS_FORWARDING=true
-          - DB_VENDOR=postgres
-          - DB_ADDR=database
-          - DB_PORT=5432
-          - DB_DATABASE=emu
-          - DB_USER=database-user
-          - DB_PASSWORD=database-password
+            - KEYCLOAK_USER=keycloakadmin
+            - KEYCLOAK_PASSWORD=1234
+            - PROXY_ADDRESS_FORWARDING=true
+            - DB_VENDOR=postgres
+            - DB_ADDR=database
+            - DB_PORT=5432
+            - DB_DATABASE=emu
+            - DB_USER=database-user
+            - DB_PASSWORD=database-password
+
+    manager-frontend:
+        restart: always
+        image: manager-frontend
+        build: ./manager-frontend
+        ports:
+            - 6500:80
