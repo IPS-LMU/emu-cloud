@@ -27,7 +27,6 @@ services:
         volumes:
             - /var/emu-cloud/postgresql-data:/var/lib/postgresql/data
         environment:
-            - POSTGRES_PASSWORD summerday-root
             - POSTGRES_DB=emu
             - POSTGRES_USER=database-user
             - POSTGRES_PASSWORD=database-password
