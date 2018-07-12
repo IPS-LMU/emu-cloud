@@ -52,8 +52,13 @@ Note that if you do put the services behind a gateway, you will need to adjust t
 The next steps will be to feed some initial data into your new services:
 
 1. Configure Keycloak
-   1. In the clients menu, import a new client using the file in ```initial-setup/emudb-manager.json``` (but first replace all instances of example.com in that file with the host name of your server)
-   2. Add a user account for testing and name it ```scientist1```.
+   1. Keycloak will refuse any non-encrypted connections. For production purposes, this is good, but for testing purposes, change it like this:
+      1. You need to connect to the database server. If you have ```psql``` (the PostgreSQL client) installed on your server, use that. Otherwise, use a machine that can access port 5432 on your server.
+      2. ```psql  -h hostname-of-your-server -U database-user emu``` # NB: emu is the database name
+      3. ```update realm set ssl_required='none' where id='master';```
+   2. Open up Keycloak at ```http://hostname-of-your-server:6520``` and log in as ```keycloakadmin``` (you have set the password in ```docker-compose.yml```).
+   3. In the clients menu, import a new client using the file in ```initial-setup/emudb-manager.json``` (but first replace all instances of example.com in that file with the host name of your server)
+   4. Add a user account for testing and name it ```scientist1```.
 2. In the Postgres database server, import the dump from ```initial-setup/emu.sql```). This creates the two tables ```emu.permissions``` and ```emu.projects```.
 3. In ```/var/emu-cloud/emuDBs```, create a directory ```test-project``` with the subdirectories ```databases```, ```downloads```, and ```uploads```.
 
