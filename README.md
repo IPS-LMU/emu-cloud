@@ -18,20 +18,20 @@ This is a step-by-step guide for installing the proposed setup (which includes K
 
 1. Clone this repository
 2. Adjust the configuration:
-   1. Change default passwords in docker-compose.yml: KEYCLOAK\_PASSWORD and POSTGRES\_PASSWORD
-   2. (Optional) If you don't like the default storage location /var/emu-cloud, change all instances of it in docker-compose.yml
-   3. (Optional) If you don't like the default ports 5432, 6500, 6510, 6520 and 17890, change them in docker-compose.yml
-   4. In config/emudb-manager.config.php,
-      1. in $openIdUserinfoEndpoint, change example.com to the host name of your server (adjust the port if you changed it in step 2.3),
-      2. change $dbPassword to the POSTGRES\_PASSWORD you set in step 2.1,
-      3. adjust $dbHost to database:xxxx if you changed the port in step 2.3), *@todo: not sure if this would work*
-      4. there is no need to change host name in $dbHost, as Docker will make sure the database server has the alias database (within the network of Docker containers).
-   5. In config/websocket\_server\_config.json, in openIdConnect.openIdProvider, change example.com to the host name of your server (adjust the port if you changed it in step 2.3).
-   6. (Optional) In manager-api/Dockerfile, in git config user.email, adjust the mail address (which will appear in git commits made by the system).
-   7. In manager-frontend/app.config.ts,
-      1. in openIdConnect.providerurl, change example.com to the host name of your server (adjust the port if you changed it in step 2.3).
-      2. in urls.managerAPIBackend, change example.com to the host name of your server (adjust the port if you changed it in step 2.3).
-3. Run ```docker-compose up```
+   1. Change default passwords in ```docker-compose.yml```: ```KEYCLOAK\_PASSWORD``` and ```POSTGRES\_PASSWORD```
+   2. (Optional) If you don't like the default storage location ```/var/emu-cloud```, change all instances of it in ```docker-compose.yml```
+   3. (Optional) If you don't like the default ports 5432, 6500, 6510, 6520 and 17890, change them in ```docker-compose.yml```
+   4. In ```config/emudb-manager.config.php```,
+      1. in ```$openIdUserinfoEndpoint```, change example.com to the host name of your server (adjust the port if you changed it in step 2.3),
+      2. change ```$dbPassword``` to the ```POSTGRES\_PASSWORD``` you set in step 2.1,
+      3. adjust ```$dbHost``` to database:xxxx if you changed the port in step 2.3), *@todo: not sure if this would work*
+      4. there is no need to change host name in ```$dbHost```, as Docker will make sure the database server has the DNS alias ```database``` (within the network of Docker containers).
+   5. In ```config/websocket\_server\_config.json```, in ```openIdConnect.openIdProvider```, change example.com to the host name of your server (adjust the port if you changed it in step 2.3).
+   6. (Optional) In ```manager-api/Dockerfile```, in git config user.email, adjust the mail address (which will appear in git commits made by the system).
+   7. In ```manager-frontend/app.config.ts```,
+      1. in ```openIdConnect.providerurl```, change example.com to the host name of your server (adjust the port if you changed it in step 2.3).
+      2. in ```urls.managerAPIBackend```, change example.com to the host name of your server (adjust the port if you changed it in step 2.3).
+3. Run ```docker-compose up``` (prepend ```sudo``` if appropriate for your system). This will download, install, and compile some stuff. Expect it take around five minutes.
 
 You are now at a point where your server runs:
 
@@ -52,9 +52,13 @@ Note that if you do put the services behind a gateway, you will need to adjust t
 The next steps will be to feed some initial data into your new services:
 
 1. Configure Keycloak
-   1. In the clients menu, import a new client using the file in initial-setup/emudb-manager.json (but first replace all instances of example.com in that file with the host name of your server)
-   2. Add a user account for testing and name it scientist1
-2. In the Postgres database server, import the dump from initial-setup/emu.sql). This creates the two tables emu.permissions and emu.projects.
-3. In /var/emu-cloud/emuDBs, create a directory test-project with the subdirectories databases, downloads, and uploads.
+   1. In the clients menu, import a new client using the file in ```initial-setup/emudb-manager.json``` (but first replace all instances of example.com in that file with the host name of your server)
+   2. Add a user account for testing and name it ```scientist1```.
+2. In the Postgres database server, import the dump from ```initial-setup/emu.sql```). This creates the two tables ```emu.permissions``` and ```emu.projects```.
+3. In ```/var/emu-cloud/emuDBs```, create a directory ```test-project``` with the subdirectories ```databases```, ```downloads```, and ```uploads```.
 
-You should now be able to visit http://yourservershostname.com:6500. This is the address of the emuDB-Manager frontend, which will redirect you to Keycloak, where you can log in using the scientist1 account. After logging in, you will be redirected back to the emuDB-Manager, where you can choose a project. The list should consist of only one entry, test-project. Choose it and see if you can proceed without errors.
+You should now be able to visit ```http://yourservershostname.com:6500```. This is the address of the emuDB-Manager frontend, which will redirect you to Keycloak, where you can log in using the ```scientist1``` account. After logging in, you will be redirected back to the emuDB-Manager, where you can choose a project. The list should consist of only one entry, ```test-project```. Choose it and see if you can proceed without errors.
+
+### Known Problems
+
+The emuDB-Manager backend tries to “discover” Keycloak at startup time. However, they both start at virtually the same time, so discovery will fail. Try restarting the manager backend when everything is running already (```(sudo) docker container restart emu-cloud_manager-api_1```).
