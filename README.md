@@ -69,3 +69,5 @@ You should now be able to visit ```http://yourservershostname.com:6500```. This 
 ### Known Problems
 
 The websocket server tries to “discover” Keycloak at startup time. However, they both start at virtually the same time, so discovery will fail. Try restarting the websocket server when everything is running already (```(sudo) docker container restart emucloud_websocket-protocol_1```).
+
+If you get to the project list menu in the emuDB Manager but the list is empty, try opening up Keycloak at ```http://hostname-of-your-server:6520``` and siging out from the ```keycloakadmin``` account. Then reload the manager.
