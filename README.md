@@ -18,7 +18,7 @@ This is a step-by-step guide for installing the proposed setup (which includes K
 
 1. Clone this repository
 2. Adjust the configuration:
-   1. Change default passwords in ```docker-compose.yml```: ```KEYCLOAK\_PASSWORD``` and ```POSTGRES\_PASSWORD```
+   1. Change default passwords in ```docker-compose.yml```: ```KEYCLOAK\_PASSWORD``` and ```POSTGRES\_PASSWORD``` (also set ```DB\_PASSWORD``` in the keycloack section to the value of ```POSTGRES\_PASSWORD```)
    2. (Optional) If you don't like the default storage location ```/var/emu-cloud```, change all instances of it in ```docker-compose.yml```
    3. (Optional) If you don't like the default ports 5432, 6500, 6510, 6520 and 17890, change them in ```docker-compose.yml```
    4. In ```config/emudb-manager.config.php```,

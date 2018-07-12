@@ -21,7 +21,7 @@ services:
 
     database: 
         restart: always
-        image: postgres
+        image: postgres:10.4
         ports:
             - 5432:5432
         volumes:
@@ -33,7 +33,7 @@ services:
 
     keycloak:
         restart: always
-        image: jboss/keycloak
+        image: jboss/keycloak:4.1.0.Final
         ports:
             - 6520:8080
         environment:
