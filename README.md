@@ -1,6 +1,6 @@
 # emu-cloud
 
-**This repository is in alpha stage.**
+**This repository is in beta stage.**
 
 The EMU Speech Database Management System is built for analyzing research data in phonetics (or more broadly, linguistics). This repository contains all components necessary to run the EMU-SDMS in a private cloud (e.g. to be hosted by a university) using Docker.
 
