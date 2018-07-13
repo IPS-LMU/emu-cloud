@@ -32,9 +32,9 @@ This is a step-by-step guide for installing the proposed setup (which includes K
       1. in ```openIdConnect.providerUrl```, change example.com to the host name of your server (adjust the port if you changed it in step 2.3).
       2. in ```urls.managerAPIBackend```, change example.com to the host name of your server (adjust the port if you changed it in step 2.3).
       3. in ```urls.nodeJSServer```, change example.com to the host name of your server (adjust the port if you changed it in step 2.3).
-3. Run ```docker-compose up``` (prepend ```sudo``` if appropriate for your system). This will download, install, and compile some stuff. Expect it to take around five minutes.
+3. Run ```docker-compose up``` (prepend ```sudo``` if appropriate for your system). This will download, compile, install, and start some stuff. Expect it to take around five minutes.
 
-You are now at a point where your server runs:
+You are now at a point where your server is running:
 
 - The emuDB-Manager frontend on port 6500
 - The emuDB-Manager backend on port 6510
