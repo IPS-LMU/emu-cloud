@@ -3,7 +3,8 @@ FROM php:7.1-apache
 RUN apt-get update && apt-get install -y \
 	git \
         libpq-dev \
-    && docker-php-ext-install -j$(nproc) pdo pdo_pgsql\
+        zlib1g-dev \
+    && docker-php-ext-install -j$(nproc) pdo pdo_pgsql zip\
     && rm -rf /var/lib/apt/lists/*
 
 RUN git clone https://github.com/IPS-LMU/emuDB-manager.git /code
