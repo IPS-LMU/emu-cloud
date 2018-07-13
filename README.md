@@ -72,3 +72,5 @@ You should now be able to visit ```http://yourservershostname.com:6500```. This 
 The websocket server tries to “discover” Keycloak at startup time. However, they both start at virtually the same time, so discovery will fail. Try restarting the websocket server when everything is running already (```(sudo) docker container restart emucloud_websocket-protocol_1```).
 
 If you get to the project list menu in the emuDB Manager but the list is empty, try opening up Keycloak at ```http://hostname-of-your-server:6520``` and siging out from the ```keycloakadmin``` account. Then reload the manager.
+
+When you click the EMU-webApp button in emuDB-Manager before you properly set up TLS/HTTPS, you will receive a misleading error message from EMU-webApp. This is because the EMU-webApp is loaded over HTTPS and then tries to make a WebSocket connection to a non-TLS server, which has been disabled by browser vendors. Do not acknowledged the error dialog, just change the URL from HTTPS to HTTP. This is of course never advisable for production usage.
