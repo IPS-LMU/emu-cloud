@@ -3,6 +3,7 @@ FROM nginx:1-alpine
 # Install nodejs and git for build
 RUN apk add --update \
     nodejs \
+    npm \
     git \
   && rm -rf /var/cache/apk/*
 
